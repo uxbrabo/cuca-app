@@ -4,11 +4,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// Importa nossas telas, mas agora com caminhos relativos a este arquivo
-import SplashScreen from '../screens/SplashScreen';
-import OnboardingScreen from '../screens/OnboardingScreen';
-import LoginScreen from '../screens/LoginScreen';
-import SignInScreen from '../screens/SignInScreen';
+import SplashScreen from '~/screens/SplashScreen';
+import OnboardingScreen from '~/screens/OnboardingScreen';
+import LoginScreen from '~/screens/LoginScreen';
+import SignInScreen from '~/screens/SignInScreen';
 
 // O mapa de telas continua o mesmo
 export type RootStackParamList = {
@@ -31,15 +30,13 @@ function RootNavigator() {
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen
-          name="SignIn"
-          component={SignInScreen}
-          // As opções específicas da tela virão aqui depois
-          options={{
-            headerShown: true, // Mostra o cabeçalho para esta tela
-            title: '',
-            headerBackTitle: 'Voltar',
-          }}
+
+        <Stack.Screen name="SignIn" component={SignInScreen}
+            options={{
+                headerShown: true,
+                title: 'Login',
+                headerBackTitle: 'Voltar',
+            }}
         />
       </Stack.Navigator>
     </NavigationContainer>

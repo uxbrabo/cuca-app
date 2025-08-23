@@ -1,15 +1,16 @@
 // Em: src/screens/OnboardingScreen.tsx
 
 import React from 'react';
-import { StyleSheet, ImageBackground, Text, View } from 'react-native';
+import { ImageBackground, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from 'react-native-paper';
-
-// --- ADIÇÕES IMPORTANTES ---
-// 1. Importamos as ferramentas de "tipagem" da navegação
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../App'; // Nosso mapa de telas
+import { RootStackParamList } from '~/navigation/RootNavigator';
+
+// ADICIONE ESTA LINHA QUE FALTAVA:
+import styles from './OnboardingScreen.styles';
+
 
 // 2. Criamos o "contrato" que descreve as propriedades desta tela
 type Props = NativeStackScreenProps<RootStackParamList, 'Onboarding'>;
@@ -55,58 +56,5 @@ function OnboardingScreen({ navigation }: Props): React.JSX.Element {
     </ImageBackground>
   );
 }
-
-// Seus estilos continuam os mesmos aqui
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
-  safeArea: {
-    flex: 1,
-  },
-  gradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: '60%',
-  },
-  contentContainer: {
-    flex: 1,
-    padding: 24,
-    justifyContent: 'flex-end',
-  },
-  textContainer: {
-    alignItems: 'center',
-    marginBottom: 32,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#FFFFFF',
-    textAlign: 'center',
-    marginTop: 8,
-  },
-  button: {
-    borderRadius: 16,
-    paddingVertical: 8,
-  },
-  buttonLabel: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  footerText: {
-    fontSize: 12,
-    color: '#FFFFFF',
-    textAlign: 'center',
-    marginTop: 40,
-    opacity: 0.8,
-  },
-});
 
 export default OnboardingScreen;
