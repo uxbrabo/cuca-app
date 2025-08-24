@@ -71,7 +71,7 @@ function SignInScreen({ navigation }: Props): React.JSX.Element {
         {/* --- BOTÃO DE LOGIN --- */}
         <Button
           mode="contained"
-          onPress={() => console.log('Entrar com email/senha')}
+          onPress={() => navigation.navigate('PostLoginOnboarding')}
           style={styles.button}
         >
           Login

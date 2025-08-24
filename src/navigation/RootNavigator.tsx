@@ -11,6 +11,7 @@ import SignInScreen from '~/screens/SignInScreen';
 import RegisterScreen from '~/screens/RegisterScreen';
 import ForgotPasswordScreen from '~/screens/ForgotPasswordScreen';
 import VerificationScreen from '~/screens/VerificationScreen';
+import PostLoginOnboardingScreen from '~/screens/PostLoginOnboardingScreen';
 
 // O mapa de telas continua o mesmo
 export type RootStackParamList = {
@@ -21,6 +22,7 @@ export type RootStackParamList = {
   Register: undefined;
   ForgotPassword: undefined;
   Verification: undefined;
+  PostLoginOnboarding: undefined;
 }
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -67,6 +69,14 @@ function RootNavigator() {
                 headerBackTitle: 'Voltar',
             }}
 />
+
+        <Stack.Screen name="PostLoginOnboarding" component={PostLoginOnboardingScreen}
+            options={{
+                headerShown: true,
+                title: 'Boas-vindas',
+                headerBackTitle: 'Voltar',
+            }}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>
