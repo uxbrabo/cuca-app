@@ -27,15 +27,18 @@ function LoginScreen({ navigation }: Props): React.JSX.Element {
         >
           Login
         </Button>
+
         <Button
           mode="contained"
-          onPress={() => console.log('Cadastre-se Pressionado')}
+          onPress={() => navigation.navigate('Register')}
           style={[styles.button, styles.registerButton]}
           labelStyle={styles.registerButtonLabel}
         >
           Cadastre-se
         </Button>
+
         <Text style={styles.separator}>ou</Text>
+
         <Button
           icon="google"
           mode="outlined"
@@ -46,16 +49,7 @@ function LoginScreen({ navigation }: Props): React.JSX.Element {
         >
           Entrar com o Google
         </Button>
-        <Button
-          icon="facebook"
-          mode="outlined"
-          onPress={() => console.log('Facebook Pressionado')}
-          style={styles.socialButton}
-          labelStyle={styles.socialButtonLabel}
-          contentStyle={styles.socialButtonContent}
-        >
-          Entrar com o Facebook
-        </Button>
+
       </View>
     </SafeAreaView>
   );

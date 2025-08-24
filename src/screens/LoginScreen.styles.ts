@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: 16,
-    width: 320,
-    paddingTop: 8,
-    paddingBottom: 8,
+    width: 361,
+    paddingTop: 4,
+    paddingBottom: 4,
     borderRadius: 16,
   },
   registerButton: {

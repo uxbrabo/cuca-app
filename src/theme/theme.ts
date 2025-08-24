@@ -7,11 +7,12 @@ export const theme = {
   ...DefaultTheme, // Copia todas as propriedades do tema padrão
   colors: {
     ...DefaultTheme.colors, // Copia todas as cores padrão
-    primary: '#0052cc',     // Cor primária do seu app (azul escuro)
+    primary: '#30628C',     // Cor primária do seu app (azul escuro)
+    secundary: '#CDE5FF',  // Cor secundária (ciano)
     background: '#FFFFFF',  // Fundo branco
     
     // Cores customizadas que usamos nas telas
-    splashBackground: '#dbe9ff',
+    splashBackground: '#CDE5FF',
     brand: '#0052cc',
     footerText: '#6a85a6',
   },

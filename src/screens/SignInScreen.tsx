@@ -63,7 +63,7 @@ function SignInScreen({ navigation }: Props): React.JSX.Element {
             style={styles.checkboxContainer}
             position="leading"
         />
-          <TouchableOpacity onPress={() => console.log('Esqueceu a senha')}>
+          <TouchableOpacity onPress={() => navigation.navigate ('ForgotPassword')}>
             <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
           </TouchableOpacity>
         </View>
@@ -90,22 +90,12 @@ function SignInScreen({ navigation }: Props): React.JSX.Element {
         >
           Entrar com o Google
         </Button>
-        <Button
-          icon="facebook"
-          mode="outlined"
-          onPress={() => console.log('Facebook Pressionado')}
-          style={styles.socialButton}
-          labelStyle={styles.socialButtonLabel}
-          contentStyle={styles.socialButtonContent}
-        >
-          Entrar com o Facebook
-        </Button>
 
         {/* --- LINK DE REGISTRO --- */}
         <View style={styles.registerRow}>
           <Text style={styles.registerTextRegular}>Você não tem conta? </Text>
-          <TouchableOpacity onPress={() => console.log('Ir para Registro')}>
-            <Text style={styles.registerTextBold}>Registrar</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.registerTextBold}>Cadastrar</Text>
           </TouchableOpacity>
         </View>
       </View>
