@@ -12,6 +12,7 @@ import RegisterScreen from '~/screens/RegisterScreen';
 import ForgotPasswordScreen from '~/screens/ForgotPasswordScreen';
 import VerificationScreen from '~/screens/VerificationScreen';
 import PostLoginOnboardingScreen from '~/screens/PostLoginOnboardingScreen';
+import MainTabNavigator from './MainTabNavigator';
 
 // O mapa de telas continua o mesmo
 export type RootStackParamList = {
@@ -23,6 +24,7 @@ export type RootStackParamList = {
   ForgotPassword: undefined;
   Verification: undefined;
   PostLoginOnboarding: undefined;
+  MainTabs: undefined;
 }
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -78,6 +80,8 @@ function RootNavigator() {
             }}
         />
 
+        {/* Adicionando o navegador de abas como uma tela no stack principal */}
+        <Stack.Screen name="MainTabs" component={MainTabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -20,7 +20,7 @@ function PostLoginOnboardingScreen({ navigation }: Props): React.JSX.Element {
       pagerRef.current?.setPage(pageIndex + 1);
     } else {
       // No futuro, isto navegará para a tela Home
-      console.log('Navegar para a Home Screen!');
+      navigation.replace('MainTabs');
     }
   };
 
