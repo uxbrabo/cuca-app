@@ -32,7 +32,7 @@ function MainTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="News"
+        name="Novidades"
         component={NewsScreen}
         options={{
           tabBarLabel: 'Novidades',
@@ -42,7 +42,7 @@ function MainTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Messages"
+        name="Mensagens"
         component={MessagesScreen}
         options={{
           tabBarLabel: 'Mensagem',
@@ -53,7 +53,7 @@ function MainTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name="Perfil"
         component={ProfileScreen}
         options={{
           tabBarLabel: 'Perfil',
