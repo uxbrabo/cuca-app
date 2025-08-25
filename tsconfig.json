@@ -6,6 +6,9 @@
     "paths": {
       "~/*": [
         "src/*"
+      ],
+      "@/*": [
+        "./*" // <-- AQUI ESTÁ A REGRA PARA O ATALHO DA RAIZ
       ]
     }
   }

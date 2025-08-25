@@ -1,6 +1,6 @@
 // Em: src/screens/HomeScreen.styles.ts
 import { StyleSheet } from 'react-native';
-import { theme } from '~/theme/theme';
+import { theme } from '@/src/theme/theme';
 
 const styles = StyleSheet.create({
   // Container principal da tela
@@ -65,11 +65,17 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     marginBottom: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 24, // Padding para o título "Menu"
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  seeMoreButton: {
+    marginRight: -12, // Compensa o padding interno do botão para alinhar visualmente
   },
   menuItem: {
     alignItems: 'center',    
@@ -91,6 +97,47 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     height: 32, // Garante espaço para duas linhas
   },
+
+  // ===================================
+  // Estilos da Seção Ranking
+  // ===================================
+
+  rankingCard: {
+    backgroundColor: '#e8f0fe', // O azul bem claro do card
+    borderRadius: 24,
+    padding: 16,
+    marginHorizontal: 24, // Adiciona as margens laterais do card
+  },
+  rankingItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  // Estilo para o último item da lista não ter margem embaixo
+  lastRankingItem: {
+    marginBottom: 0,
+  },
+  rankingAvatarContainer: {
+    marginRight: 16,
+  },
+  rankingTexts: {
+    flex: 1, // Ocupa o espaço que sobra no meio
+  },
+  rankingName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1c1c1c',
+  },
+  rankingXp: {
+    fontSize: 14,
+    color: 'grey',
+  },
+  rankingBadge: {
+    width: 40,
+    height: 40,
+    resizeMode: 'contain',
+  },
+
 });
 
 export default styles;
