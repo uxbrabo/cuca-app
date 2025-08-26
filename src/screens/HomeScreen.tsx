@@ -1,23 +1,35 @@
 // Em: src/screens/HomeScreen.tsx
 
 import React from 'react';
-// 1. Adicionamos TouchableOpacity para os cards clicáveis
-import { View, Text, ScrollView, FlatList, Image, TouchableOpacity } from 'react-native';
-import { Searchbar, IconButton, Avatar, Button, Card } from 'react-native-paper';
+import {
+  View,
+  Text,
+  ScrollView,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Modal,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Searchbar, IconButton, Avatar, Button, Card, Menu, Drawer, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { theme } from '~/theme/theme';
 import styles from './HomeScreen.styles';
 
 function HomeScreen(): React.JSX.Element {
+  const navigation: any = useNavigation();
   const [searchQuery, setSearchQuery] = React.useState('');
+  const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
+  const [isNotificationsVisible, setIsNotificationsVisible] = React.useState(false);
 
   const menuItems = [
-    { id: '1', title: 'Meu Desempenho', icon: 'chart-line-variant' },
-    { id: '2', title: 'Minhas Disciplinas', icon: 'book-open-variant' },
-    { id: '3', title: 'HUB de Conteúdo', icon: 'school-outline' },
-    { id: '4', title: 'Arena de Quizzes', icon: 'trophy-outline' },
-    { id: '5', title: 'Estudo colaborativo', icon: 'account-group-outline' },
-    { id: '6', title: 'Portal da família', icon: 'web' },
+    { id: '1', title: 'Meu Desempenho', icon: 'chart-line-variant', screen: 'Performance' },
+    { id: '2', title: 'Minhas Disciplinas', icon: 'book-open-variant', screen: 'Subjects' },
+    { id: '3', title: 'HUB de Conteúdo', icon: 'school-outline', screen: 'ContentHub' },
+    { id: '4', title: 'Arena de Quizzes', icon: 'trophy-outline', screen: 'QuizArena' },
+    { id: '5', title: 'Estudo colaborativo', icon: 'account-group-outline', screen: 'CollaborativeStudy' },
+    { id: '6', title: 'Portal da família', icon: 'web', screen: 'FamilyPortal' },
   ];
 
   const rankingData = [
@@ -77,6 +89,12 @@ function HomeScreen(): React.JSX.Element {
     },
   ];
 
+  const openDrawer = () => setIsDrawerVisible(true);
+  const closeDrawer = () => setIsDrawerVisible(false);
+
+  const openNotificationsMenu = () => setIsNotificationsVisible(true);
+  const closeNotificationsMenu = () => setIsNotificationsVisible(false);
+
 
   return (
     <View style={styles.container}>
@@ -95,8 +113,42 @@ function HomeScreen(): React.JSX.Element {
               </View>
             </View>
             <View style={styles.headerIcons}>
-              <IconButton icon="bell-outline" size={24} style={styles.iconButton} />
-              <IconButton icon="menu" size={24} style={styles.iconButton} />
+              <Menu
+                visible={isNotificationsVisible}
+                onDismiss={closeNotificationsMenu}
+                anchor={
+                  <IconButton
+                    icon="bell-outline"
+                    size={24}
+                    style={styles.iconButton}
+                    onPress={openNotificationsMenu}
+                  />
+                }
+                contentStyle={styles.notificationMenu}
+              >
+                <Menu.Item
+                  leadingIcon="school-outline"
+                  title="Aula de Matemática cancelada"
+                  onPress={() => {}}
+                />
+                <Menu.Item
+                  leadingIcon="message-text-outline"
+                  title="Nova mensagem de 'Prof. Silva'"
+                  onPress={() => {}}
+                />
+                <Divider />
+                <Menu.Item
+                  leadingIcon="trophy-outline"
+                  title="Você subiu no Ranking!"
+                  onPress={() => {}}
+                />
+                <Menu.Item
+                  leadingIcon="calendar-check-outline"
+                  title="Lembrete: Prova de Biologia amanhã"
+                  onPress={() => {}}
+                />
+              </Menu>
+              <IconButton icon="menu" size={24} style={styles.iconButton} onPress={openDrawer} />
             </View>
           </View>
           <Searchbar
@@ -117,12 +169,14 @@ function HomeScreen(): React.JSX.Element {
           <FlatList
             data={menuItems}
             renderItem={({ item }) => (
-              <View style={styles.menuItem}>
-                <View style={styles.menuIconContainer}>
-                  <Icon name={item.icon} size={32} color={theme.colors.primary} />
+              <TouchableOpacity onPress={() => console.log(`Menu item clicado: ${item.title}`)}>
+                <View style={styles.menuItem}>
+                  <View style={styles.menuIconContainer}>
+                    <Icon name={item.icon} size={32} color={theme.colors.primary} />
+                  </View>
+                  <Text style={styles.menuText}>{item.title}</Text>
                 </View>
-                <Text style={styles.menuText}>{item.title}</Text>
-              </View>
+              </TouchableOpacity>
             )}
             keyExtractor={(item) => item.id}
             horizontal
@@ -185,7 +239,7 @@ function HomeScreen(): React.JSX.Element {
                 <Text style={styles.articleTitle}>{item.title}</Text>
                 <Text style={styles.articleDescription}>{item.description}</Text>
                 <View style={styles.articleMetaContainer}>
-                  <Icon name="clock-outline" size={14} color="grey" />
+                  <Icon name="clock-outline" size={14} color={theme.colors.onSurfaceVariant} />
                   <Text style={styles.articleMetaText}>{item.time}</Text>
                 </View>
               </View>
@@ -227,6 +281,64 @@ function HomeScreen(): React.JSX.Element {
         </View>
 
       </ScrollView>
+
+      {/* ======================= DRAWER (MENU LATERAL) ======================= */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={isDrawerVisible}
+        onRequestClose={closeDrawer}
+      >
+        <TouchableWithoutFeedback onPress={closeDrawer}>
+          <View style={styles.modalBackdrop}>
+            <TouchableWithoutFeedback>
+              <View style={styles.drawerContainer}>
+                <View style={styles.drawerHeader}>
+                  <Avatar.Image size={64} source={{ uri: 'https://i.pravatar.cc/150' }} />
+                  <Text style={styles.drawerUserName}>João</Text>
+                  <Text style={styles.drawerUserEmail}>joao.silva@email.com</Text>
+                  <Text style={styles.drawerUserXp}>4833 XP</Text>
+                </View>
+
+                <Drawer.Section style={styles.drawerSection}>
+                  <Drawer.Item
+                    icon="cog-outline"
+                    label="Configurações"
+                    onPress={() => { closeDrawer(); console.log('Navegar para Configurações'); }}
+                  />
+                  <Drawer.Item
+                    icon="account-circle-outline"
+                    label="Perfil"
+                    onPress={() => { closeDrawer(); console.log('Navegar para Perfil'); }}
+                  />
+                </Drawer.Section>
+
+                <Drawer.Section title="Menu Principal" style={styles.drawerSection}>
+                  {menuItems.map(item => (
+                    <Drawer.Item
+                      key={item.id}
+                      icon={item.icon}
+                      label={item.title}
+                      onPress={() => { closeDrawer(); console.log(`Navegar para ${item.title}`); }}
+                    />
+                  ))}
+                </Drawer.Section>
+
+                <Drawer.Section style={styles.drawerFooter}>
+                  <Drawer.Item
+                    icon="logout"
+                    label="Sair do app"
+                    onPress={() => {
+                      closeDrawer();
+                      console.log('Sair do app');
+                    }}
+                  />
+                </Drawer.Section>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </View>
   );
 }

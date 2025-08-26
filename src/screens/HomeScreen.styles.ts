@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   // Container principal da tela
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5', // O fundo cinza claro da tela inteira
+    backgroundColor: theme.colors.background, // O fundo cinza claro da tela inteira
   },
   // Estilo para o conteúdo do ScrollView para garantir que o último item não seja cortado
   scrollViewContent: {
@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
   // Estilos do Cabeçalho
   // ===================================
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.colors.surface,
     paddingHorizontal: 24,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: theme.colors.outlineVariant, // Cor mais suave para a linha
   },
   headerTopRow: {
     flexDirection: 'row',
@@ -40,11 +40,11 @@ const styles = StyleSheet.create({
   greetingTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1c1c1c',
+    color: theme.colors.onSurface,
   },
   greetingSubtitle: {
     fontSize: 14,
-    color: 'grey',
+    color: theme.colors.onSurfaceVariant,
   },
   headerIcons: {
     flexDirection: 'row',
@@ -53,9 +53,13 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     margin: 0,
   },
+  notificationMenu: {
+    // Ajusta a posição do menu de notificação para não sobrepor o ícone
+    marginTop: 40,
+  },
 
    searchBar: {
-    backgroundColor: theme.colors.secundary,
+    backgroundColor: theme.colors.secondary,
     borderRadius: 30,
     elevation: 0,
   },
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
   // ===================================
   section: {
     paddingVertical: 24,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.colors.surface,
   },
   sectionHeader: {
     marginBottom: 16,
@@ -90,7 +94,7 @@ const styles = StyleSheet.create({
     width: 96,
     height: 96,
     borderRadius: 16,
-    backgroundColor: theme.colors.secundary,
+    backgroundColor: theme.colors.secondary,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8,
@@ -108,7 +112,7 @@ const styles = StyleSheet.create({
   // ===================================
 
   rankingCard: {
-    backgroundColor: '#e8f0fe', // O azul bem claro do card
+    backgroundColor: '#e8f0fe', // Cor original do card de ranking
     borderRadius: 24,
     padding: 16,
     marginHorizontal: 24, // Adiciona as margens laterais do card
@@ -131,12 +135,12 @@ const styles = StyleSheet.create({
   rankingName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1c1c1c',
+    color: theme.colors.onSurface,
     marginBottom: 4, // Adiciona um espaçamento entre o nome e o XP
   },
   rankingXp: {
     fontSize: 14,
-    color: 'grey',
+    color: theme.colors.onSurfaceVariant,
   },
   rankingBadge: {
     width: 40,
@@ -169,11 +173,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 4,
-    color: '#1c1c1c',
+    color: theme.colors.onSurface,
   },
   articleDescription: {
     fontSize: 14,
-    color: 'grey',
+    color: theme.colors.onSurfaceVariant,
     marginBottom: 8,
   },
   articleMetaContainer: {
@@ -182,7 +186,7 @@ const styles = StyleSheet.create({
   },
   articleMetaText: {
     fontSize: 12,
-    color: 'grey',
+    color: theme.colors.onSurfaceVariant,
     marginLeft: 4,
   },
 
@@ -194,21 +198,23 @@ const styles = StyleSheet.create({
     marginRight: 16,
     backgroundColor: theme.colors.background, // Garante o fundo branco do card
     marginBottom: 16, // Adiciona espaço para o ícone de play que vaza para baixo
-    elevation: 0, // Remove a sombra no Android
-    shadowOpacity: 0, // Remove a sombra no iOS
-    borderWidth: 1, // Adiciona uma borda para compensar a falta de sombra
-    borderColor: '#e0e0e0', // Cor da borda
+    // Adicionando uma sombra sutil para destacar o card no fundo branco
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   },
   videoTitle: {
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 8,
-    color: '#1c1c1c',
+    color: theme.colors.onSurface,
     textAlign: 'left', // Alinha o título à esquerda
   },
   videoSubtitle: {
     fontSize: 12,
-    color: 'grey',
+    color: theme.colors.onSurfaceVariant,
     textAlign: 'left', // Alinha o subtítulo à esquerda
   },
   playIconContainer: {
@@ -221,9 +227,65 @@ const styles = StyleSheet.create({
   videoCardCover: {
     // Garante que a imagem não seja esticada ou cortada
     resizeMode: 'contain',
-    backgroundColor: theme.colors.secundary, // Cor de fundo para a área não preenchida pela imagem
+    backgroundColor: theme.colors.secondary, // Cor de fundo para a área não preenchida pela imagem
   },
 
+  // ===================================
+  // Estilos de Notificações
+  // ===================================
+
+  // ===================================
+  // Estilos do Drawer (Menu Lateral)
+  // ===================================
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: theme.colors.backdrop,
+    // Alinha o drawer à direita
+    alignItems: 'flex-end',
+  },
+  drawerContainer: {
+    width: 300,
+    height: '100%',
+    backgroundColor: theme.colors.surface, // Cor de fundo do drawer, geralmente branco ou off-white
+    elevation: 16, // Sombra para Android
+    shadowColor: '#000', // Sombra para iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  drawerHeader: {
+    paddingHorizontal: 20,
+    paddingTop: 60, // Espaço para a status bar
+    paddingBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.outline,
+  },
+  drawerUserName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 16,
+    color: theme.colors.onSurface,
+  },
+  drawerUserEmail: {
+    fontSize: 14,
+    color: theme.colors.onSurfaceVariant,
+  },
+  drawerUserXp: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: theme.colors.primary,
+    marginTop: 8,
+  },
+  drawerSection: {
+    marginTop: 16,
+  },
+  drawerFooter: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingBottom: 24, // Espaço para a home bar do iOS
+  },
 });
 
 export default styles;
