@@ -1,8 +1,9 @@
 // Em: src/screens/HomeScreen.tsx
 
 import React from 'react';
-import { View, Text, ScrollView, FlatList, Image } from 'react-native';
-import { Searchbar, IconButton, Avatar, Button } from 'react-native-paper';
+// 1. Adicionamos TouchableOpacity para os cards clicáveis
+import { View, Text, ScrollView, FlatList, Image, TouchableOpacity } from 'react-native';
+import { Searchbar, IconButton, Avatar, Button, Card } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { theme } from '~/theme/theme';
 import styles from './HomeScreen.styles';
@@ -43,9 +44,46 @@ function HomeScreen(): React.JSX.Element {
     },
   ];
 
+  // 2. Adicionamos os dados para a nova seção
+  const articlesData = [
+    {
+      id: '1',
+      title: 'Matemática',
+      description: '12 resoluções de equações logarítmicas',
+      time: '3 min atrás • 33 min',
+      image: require('@/assets/artigo_matematica.png'),
+    },
+    {
+      id: '2',
+      title: 'Literatura',
+      description: 'Memorize o poema de Carlos Drummond de Andrade',
+      time: '1d e 3 horas atrás • 33 min',
+      image: require('@/assets/artigo_literatura.png'),
+    },
+  ];
+
+  const videoData = [
+    {
+      id: '1',
+      title: 'Matemática',
+      subtitle: 'Aula 33 - Algoritmo e Álgebra',
+      image: require('@/assets/video_matematica.png'),
+    },
+    {
+      id: '2',
+      title: 'Literatura',
+      subtitle: 'Aula 12 - Romantismo no Brasil',
+      image: require('@/assets/video_literatura.png'),
+    },
+  ];
+
+
   return (
     <View style={styles.container}>
-      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollViewContent} // Adiciona este estilo
+      >
         {/* ======================= SEÇÃO DO CABEÇALHO ========================= */}
         <View style={styles.header}>
           <View style={styles.headerTopRow}>
@@ -97,16 +135,9 @@ function HomeScreen(): React.JSX.Element {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Ranking Arena de Quizzes</Text>
-            <Button
-              mode="text"
-              icon="arrow-right"
-              onPress={() => console.log('Ver mais ranking pressionado')}
-              contentStyle={{ flexDirection: 'row-reverse' }} // Coloca o ícone à direita
-              labelStyle={{ fontWeight: 'bold' }}
-              style={styles.seeMoreButton}
-            >
-              Ver mais
-            </Button>
+            <TouchableOpacity>
+              <Icon name="arrow-right" size={24} color={theme.colors.primary} />
+            </TouchableOpacity>
           </View>
 
           <View style={styles.rankingCard}>
@@ -130,6 +161,71 @@ function HomeScreen(): React.JSX.Element {
             ))}
           </View>
         </View>
+        
+    
+        {/* =================== SEÇÃO DE LEITURAS E ARTIGOS =================== */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Leituras e artigos</Text>
+            <TouchableOpacity>
+              <Icon name="arrow-right" size={24} color={theme.colors.primary} />
+            </TouchableOpacity>
+          </View>
+
+          {articlesData.map((item, index) => (
+            <TouchableOpacity 
+              key={item.id} 
+              style={[
+                styles.articleCard,
+                index === articlesData.length - 1 && styles.lastArticleCard
+              ]}
+            >
+              <Image source={item.image} style={styles.articleImage} />
+              <View style={styles.articleTextContainer}>
+                <Text style={styles.articleTitle}>{item.title}</Text>
+                <Text style={styles.articleDescription}>{item.description}</Text>
+                <View style={styles.articleMetaContainer}>
+                  <Icon name="clock-outline" size={14} color="grey" />
+                  <Text style={styles.articleMetaText}>{item.time}</Text>
+                </View>
+              </View>
+              <Icon name="chevron-right" size={24} color="lightgrey" />
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* ======================= SEÇÃO DE VÍDEO AULAS ======================= */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Vídeo aulas</Text>
+            <TouchableOpacity>
+              <Icon name="arrow-right" size={24} color={theme.colors.primary} />
+            </TouchableOpacity>
+          </View>
+
+          <FlatList
+            data={videoData}
+            renderItem={({ item }) => (
+              <Card style={styles.videoCard}>
+                <View>
+                  <Card.Cover source={item.image} style={styles.videoCardCover} />
+                  <View style={styles.playIconContainer}>
+                    <IconButton icon="play" iconColor="#FFFFFF" size={24} />
+                  </View>
+                </View>
+                <Card.Content>
+                  <Text style={styles.videoTitle}>{item.title}</Text>
+                  <Text style={styles.videoSubtitle}>{item.subtitle}</Text>
+                </Card.Content>
+              </Card>
+            )}
+            keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 24, paddingRight: 8 }}
+          />
+        </View>
+
       </ScrollView>
     </View>
   );
