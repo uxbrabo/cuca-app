@@ -6,7 +6,7 @@ import { Image, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from 'react-native-paper';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~/navigation/RootNavigator';
+import { RootStackParamList } from '~/navigation/types';
 // ADICIONE ESTA LINHA:
 import styles from './LoginScreen.styles';
 
@@ -18,7 +18,7 @@ function LoginScreen({ navigation }: Props): React.JSX.Element {
     <SafeAreaView style={styles.container}>
       {/* View interna para controlar o conteúdo */}
       <View style={styles.content}>
-        <Image source={require('../../assets/logo.png')} style={styles.logo} />
+        <Image source={require('~/assets/logo.png')} style={styles.logo} />
 
         <Button
           mode="contained"

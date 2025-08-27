@@ -16,14 +16,24 @@ import { Searchbar, IconButton, Avatar, Button, Card, Menu, Drawer, Divider } fr
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { theme } from '~/theme/theme';
 import styles from './HomeScreen.styles';
+import { RootStackParamList } from '~/navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// Tipo para garantir que a propriedade 'screen' seja uma chave válida de RootStackParamList
+type MenuItem = {
+  id: string;
+  title: string;
+  icon: string;
+  screen: keyof RootStackParamList;
+};
 
 function HomeScreen(): React.JSX.Element {
-  const navigation: any = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [searchQuery, setSearchQuery] = React.useState('');
   const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
   const [isNotificationsVisible, setIsNotificationsVisible] = React.useState(false);
 
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { id: '1', title: 'Meu Desempenho', icon: 'chart-line-variant', screen: 'Performance' },
     { id: '2', title: 'Minhas Disciplinas', icon: 'book-open-variant', screen: 'Subjects' },
     { id: '3', title: 'HUB de Conteúdo', icon: 'school-outline', screen: 'ContentHub' },
@@ -38,21 +48,21 @@ function HomeScreen(): React.JSX.Element {
       name: 'Maria Eduarda',
       xp: '4833 XP',
       avatarUrl: 'https://i.pravatar.cc/150?img=1',
-      badge: require('@/assets/badge_gold.png'),
+      badge: require('~/assets/badge_gold.png'),
     },
     {
       id: '2',
       name: 'João Pedro',
       xp: '4203 XP',
       avatarUrl: 'https://i.pravatar.cc/150?img=2',
-      badge: require('@/assets/badge_silver.png'),
+      badge: require('~/assets/badge_silver.png'),
     },
     {
       id: '3',
       name: 'Paulo André',
       xp: '3933 XP',
       avatarUrl: 'https://i.pravatar.cc/150?img=3',
-      badge: require('@/assets/badge_bronze.png'),
+      badge: require('~/assets/badge_bronze.png'),
     },
   ];
 
@@ -63,14 +73,14 @@ function HomeScreen(): React.JSX.Element {
       title: 'Matemática',
       description: '12 resoluções de equações logarítmicas',
       time: '3 min atrás • 33 min',
-      image: require('@/assets/artigo_matematica.png'),
+      image: require('~/assets/artigo_matematica.png'),
     },
     {
       id: '2',
       title: 'Literatura',
       description: 'Memorize o poema de Carlos Drummond de Andrade',
       time: '1d e 3 horas atrás • 33 min',
-      image: require('@/assets/artigo_literatura.png'),
+      image: require('~/assets/artigo_literatura.png'),
     },
   ];
 
@@ -79,13 +89,13 @@ function HomeScreen(): React.JSX.Element {
       id: '1',
       title: 'Matemática',
       subtitle: 'Aula 33 - Algoritmo e Álgebra',
-      image: require('@/assets/video_matematica.png'),
+      image: require('~/assets/video_matematica.png'),
     },
     {
       id: '2',
       title: 'Literatura',
       subtitle: 'Aula 12 - Romantismo no Brasil',
-      image: require('@/assets/video_literatura.png'),
+      image: require('~/assets/video_literatura.png'),
     },
   ];
 
@@ -169,7 +179,7 @@ function HomeScreen(): React.JSX.Element {
           <FlatList
             data={menuItems}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => console.log(`Menu item clicado: ${item.title}`)}>
+              <TouchableOpacity onPress={() => navigation.navigate(item.screen)}>
                 <View style={styles.menuItem}>
                   <View style={styles.menuIconContainer}>
                     <Icon name={item.icon} size={32} color={theme.colors.primary} />
@@ -319,7 +329,7 @@ function HomeScreen(): React.JSX.Element {
                       key={item.id}
                       icon={item.icon}
                       label={item.title}
-                      onPress={() => { closeDrawer(); console.log(`Navegar para ${item.title}`); }}
+                      onPress={() => { closeDrawer(); navigation.navigate(item.screen); }}
                     />
                   ))}
                 </Drawer.Section>

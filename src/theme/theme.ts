@@ -10,7 +10,10 @@ export const theme = {
     primary: '#30628C', // Cor primária do seu app (azul escuro)
     secondary: '#CDE5FF', // Cor secundária (azul claro)
     background: '#FFFFFF',  // Fundo branco
-    screenBackground: '#f5f5f5', // Fundo de tela geral
+    screenBackground: '#F7F9FF', // Fundo de tela geral
+    success: 'green',
+    error: 'red',
+    grey: 'grey',
 
     // Cores customizadas que usamos nas telas
     splashBackground: '#CDE5FF', // Mantido para referência, mas use `secondary`

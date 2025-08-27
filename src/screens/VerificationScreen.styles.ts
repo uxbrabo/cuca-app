@@ -20,13 +20,12 @@ const styles = StyleSheet.create({
   },
   otpContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around', // 'space-around' dá um espaçamento melhor
+    justifyContent: 'space-between',
   },
   // Estilo ajustado para o TextInput do Paper
   otpInput: {
-    width: 60,
+    width: '22%', // Usa porcentagem para ser mais responsivo
     textAlign: 'center',
-    backgroundColor: 'transparent', // Remove o fundo padrão do Paper
   },
   resendContainer: {
     alignItems: 'center',

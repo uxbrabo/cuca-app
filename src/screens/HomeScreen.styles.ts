@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     alignItems: 'center',    
-    width: 90,
+    width: 96, // Ajustado para conter o ícone e permitir o alinhamento correto
     marginRight: 16,
   },
   menuIconContainer: {
@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 16,
     height: 32, // Garante espaço para duas linhas
-    textAlign: 'center',
+    textAlign: 'left', // Alinha o texto ao início (esquerda)
+    width: '100%', // Garante que o texto ocupe toda a largura do contêiner
   },
 
   // ===================================

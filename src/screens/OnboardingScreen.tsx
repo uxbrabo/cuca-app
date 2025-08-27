@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from 'react-native-paper';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~/navigation/RootNavigator';
+import { RootStackParamList } from '~/navigation/types';
 
 // ADICIONE ESTA LINHA QUE FALTAVA:
 import styles from './OnboardingScreen.styles';
@@ -21,7 +21,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Onboarding'>;
 function OnboardingScreen({ navigation }: Props): React.JSX.Element {
   return (
     <ImageBackground
-      source={require('../../assets/background.png')}
+      source={require('~/assets/background.png')}
       resizeMode="cover"
       style={styles.background}
     >

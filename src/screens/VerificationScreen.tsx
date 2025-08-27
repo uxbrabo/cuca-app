@@ -5,13 +5,13 @@ import { View, Text, TouchableOpacity, TextInput as RNTextInput } from 'react-na
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, TextInput } from 'react-native-paper';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~/navigation/RootNavigator';
+import { RootStackParamList } from '~/navigation/types';
 import styles from './VerificationScreen.styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Verification'>;
 
 function VerificationScreen({ navigation }: Props): React.JSX.Element {
-  const [code, setCode] = useState(['', '', '', '']);
+  const [code, setCode] = useState<string[]>(Array(4).fill(''));
   const [countdown, setCountdown] = useState(33);
 
   // Usamos o tipo concreto do TextInput do React Native para a ref.
@@ -26,16 +26,28 @@ function VerificationScreen({ navigation }: Props): React.JSX.Element {
   }, [countdown]);
 
   const handleInputChange = (text: string, index: number) => {
-    const newCode = [...code];
-    newCode[index] = text.slice(-1);
-    setCode(newCode);
+    // Se o usuário colar um código, preenchemos todos os campos
+    if (text.length > 1 && index === 0) {
+      const newCode = text.slice(0, 4).split('');
+      // Preenche o restante com vazio se o código colado for menor que 4
+      while (newCode.length < 4) {
+        newCode.push('');
+      }
+      setCode(newCode);
+      inputs.current[newCode.length - 1]?.focus();
+    } else {
+      const newCode = [...code];
+      newCode[index] = text.slice(-1); // Garante que apenas um dígito seja inserido
+      setCode(newCode);
 
-    if (text && index < 3) {
-      inputs.current[index + 1]?.focus();
+      // Move o foco para o próximo campo se um dígito for inserido
+      if (text && index < 3) {
+        inputs.current[index + 1]?.focus();
+      }
     }
   };
 
-  const handleBackspace = (event: any, index: number) => {
+  const handleBackspace = (event: { nativeEvent: { key: string } }, index: number) => {
     if (event.nativeEvent.key === 'Backspace' && !code[index] && index > 0) {
       inputs.current[index - 1]?.focus();
     }
@@ -61,8 +73,7 @@ function VerificationScreen({ navigation }: Props): React.JSX.Element {
               ref={(ref: RNTextInput | null) => {
                 inputs.current[index] = ref;
               }}
-              mode="flat"
-              textAlign="center"
+              mode="outlined"
               autoFocus={index === 0}
             />
           ))}

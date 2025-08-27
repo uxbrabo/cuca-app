@@ -5,7 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Button, Checkbox } from 'react-native-paper';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~/navigation/RootNavigator';
+import { RootStackParamList } from '~/navigation/types';
 import { theme } from '~/theme/theme'; // O theme ainda pode ser útil aqui
 import styles from './SignInScreen.styles'; // Importando do novo arquivo
 

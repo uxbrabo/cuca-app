@@ -13,19 +13,14 @@ import ForgotPasswordScreen from '~/screens/ForgotPasswordScreen';
 import VerificationScreen from '~/screens/VerificationScreen';
 import PostLoginOnboardingScreen from '~/screens/PostLoginOnboardingScreen';
 import MainTabNavigator from './MainTabNavigator';
+import PerformanceScreen from '~/screens/PerformanceScreen';
+import SubjectsScreen from '~/screens/SubjectsScreen';
+import ContentHubScreen from '~/screens/ContentHubScreen';
+import QuizArenaScreen from '~/screens/QuizArenaScreen';
+import CollaborativeStudyScreen from '~/screens/CollaborativeStudyScreen';
+import FamilyPortalScreen from '~/screens/FamilyPortalScreen';
+import { RootStackParamList } from '~/navigation/types'; // CORREÇÃO: Importa os tipos do local correto
 
-// O mapa de telas continua o mesmo
-export type RootStackParamList = {
-  Splash: undefined;
-  Onboarding: undefined;
-  Login: undefined;
-  SignIn: undefined;
-  Register: undefined;
-  ForgotPassword: undefined;
-  Verification: undefined;
-  PostLoginOnboarding: undefined;
-  MainTabs: undefined;
-}
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 // Este é o nosso componente de navegação
@@ -80,8 +75,37 @@ function RootNavigator() {
             }}
         />
 
+        <Stack.Screen name="Performance" component={PerformanceScreen}
+            options={{
+                headerShown: true,
+                title: 'Meu Desempenho',
+                headerBackTitle: 'Voltar',
+            }}
+        />
+
+        {/* Telas do menu da Home que ainda não foram desenvolvidas */}
+        <Stack.Screen name="Subjects" component={SubjectsScreen}
+            options={{ headerShown: true, title: 'Minhas Disciplinas', headerBackTitle: 'Voltar' }}
+        />
+        <Stack.Screen name="ContentHub" component={ContentHubScreen}
+            options={{ headerShown: true, title: 'HUB de Conteúdo', headerBackTitle: 'Voltar' }}
+        />
+        <Stack.Screen name="QuizArena" component={QuizArenaScreen}
+            options={{ headerShown: true, title: 'Arena de Quizzes', headerBackTitle: 'Voltar' }}
+        />
+        <Stack.Screen name="CollaborativeStudy" component={CollaborativeStudyScreen}
+            options={{ headerShown: true, title: 'Estudo Colaborativo', headerBackTitle: 'Voltar' }}
+        />
+        <Stack.Screen name="FamilyPortal" component={FamilyPortalScreen}
+            options={{ headerShown: true, title: 'Portal da Família', headerBackTitle: 'Voltar' }}
+        />
+
         {/* Adicionando o navegador de abas como uma tela no stack principal */}
-        <Stack.Screen name="MainTabs" component={MainTabNavigator} />
+        <Stack.Screen
+            name="MainTabs"
+            component={MainTabNavigator}
+            options={{ headerShown: false }} // Garante que o header do Stack não apareça para as abas
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

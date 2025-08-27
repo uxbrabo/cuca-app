@@ -3,7 +3,7 @@ import { View, Image, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '~/screens/SplashScreen.styles';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '~/navigation/RootNavigator';
+import { RootStackParamList } from '~/navigation/types';
 
 // tipo das propriedades da nossa tela
 type Props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
@@ -20,7 +20,7 @@ function SplashScreen({ navigation }: Props): React.JSX.Element {
     <SafeAreaView style={styles.containerPrincipal}>
       <View style={styles.conteudoCentro}>
         <Image
-          source={require('../../assets/logo.png')}
+          source={require('~/assets/logo.png')}
           style={styles.logo}
         />
       </View>
